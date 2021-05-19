@@ -22,5 +22,27 @@ const getMovies = () => {
     }, 3000)
 
 }
+let newMovie = {
+    // "title": "Percy Jackson & The Lightning Thief",
+    // "author": {
+    //     "firstName": "Rick",
+    //     "lastName": "Riordan"
+    // }
+};
+let postOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+}
+
+$('#addMovie').click( (e) => {
+e.preventDefault()
+    fetch("https://quiet-purring-yellowhorn.glitch.me/movies", postOptions)
+        // .then(resp => resp.json())
+        // .then(book => console.log(book));
+        .then(getMovies);
+})
 
 getMovies()
