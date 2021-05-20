@@ -1,3 +1,15 @@
-.showEditForm {
-    display: inline;
+
+#container{
+    flex-wrap: wrap;
+    align-content: space-evenly;
 }
+img{
+    height: 350px;
+}
+
+.card{
+    display: flex;
+    margin: 10px;
+
+}
+

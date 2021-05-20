@@ -15,18 +15,31 @@ $(document).ready(function () {
                     $('#container').html('')
                     console.log(movies)
                     for (let movie of movies) {
-                        let htmlStr = `<h1>${movie.title}</h1><p>by: ${movie.director}</p><p>Rating: ${movie.rating}</p>`;
-                        htmlStr += `<button id="delete-${movie.id}" class="btn btn-primary deleteMovie">Delete</button>`;
-                        htmlStr += `<button id="edit-${movie.id}" class="btn btn-primary editMovie">Edit Movie</button>`;
+                        // let htmlStr = `<img src="${movie.poster}"> <h1>${movie.title}</h1><p>by: ${movie.director}</p><p>Rating: ${movie.rating}</p>`;
+                        // htmlStr += `<button id="delete-${movie.id}" class="btn btn-primary deleteMovie">Delete</button>`;
+                        // htmlStr += `<button id="edit-${movie.id}" class="btn btn-primary editMovie">Edit Movie</button><br>`;
 
                         // create form to edit movie
+
+                        let htmlStr = `<div class="card"  style="width: 18rem;">`;
+                        htmlStr += `<img class="card-img-top" src="${movie.poster}" alt="Card image cap">`
+                        htmlStr += ` <div class="card-body">`
+                        htmlStr += ` <h5 class="card-title">${movie.title}</h5>`
+                        htmlStr += `<p class="card-director">${movie.director}</p>`
+                        htmlStr += `<p class="card-rating">${movie.rating}</p>`
+                        htmlStr += `<button id="delete-${movie.id}" class="btn btn-primary deleteMovie">Delete</button>`;
+                        htmlStr += `<button id="edit-${movie.id}" class="btn btn-primary editMovie">Edit Movie</button><br>`;
+                        htmlStr += `</div>`
+                        htmlStr += `</div>`
+
+
                         htmlStr += `<div id="editCurrentMovie-${movie.id}" style="display: none">`
                         htmlStr += `<h3>Edit this movie</h3>`
                         htmlStr += `<form id="editForm"><div class="form-group">`;
                         htmlStr += `<label for="edit-title">Edit Movie Title</label>`;
                         htmlStr += `<input value="${movie.title}" type="text" class="form-control" id="edit-title" aria-describedby="emailHelp" placeholder='${movie.title}'></div>`;
                         htmlStr += `<div><label for="edit-director">Edit Movie Director</label>`;
-                        htmlStr += `<input value="${movie.director}" type="text" class="form-control" id="edit-director" aria-describedby="emailHelp" placeholder="${movie.director}">
+                        htmlStr += `<input value="${movie.director}" type="text" class="form-control" id="edit-director" placeholder="${movie.director}">
     </div>`;
                         htmlStr += `<label for="edit-rate">Edit the Rating</label>`;
                         htmlStr += `<select id="edit-rate" class="form-select" aria-label="Default select example">`;
@@ -51,7 +64,7 @@ $(document).ready(function () {
                         $(`#save-${movie.id}`).click(function (e) {
                             e.preventDefault();
                             let patchThis = {
-                                // "title": $('#edit-title').val(),
+                                "title": $('#edit-title').val(),
                                 "director": $('#edit-director').val(),
                                 "rating": $('#edit-rate').val()
                             }
@@ -82,16 +95,19 @@ $(document).ready(function () {
         }, 1500)
 
     }
-// let newMovie = {
-//     title: $('#movie-title').val(),
-//     director: $('#movie-director').val()
-// };
 
 
     $('#addMovie').on("click", (e) => {
         e.preventDefault();
+        let movieT = $('#movie-title').val()
+        fetch(`http://www.omdbapi.com/?apikey=${MOVIE_API_TOKEN}&t=${movieT}`)
+            .then(resp => resp.json())
+            .then(data =>{
+                let poster = data.Poster;
+                console.log(poster)
 
         let newMovie = {
+            poster: poster,
             title: $('#movie-title').val(),
             director: $('#movie-director').val(),
             rating: $("#movie-rate").val()
@@ -109,7 +125,9 @@ $(document).ready(function () {
             .then(resp => resp.json())
             .then(movies => console.log(movies));
 
-    })
+            });
+
+    });
 
     getMovies()
     //
