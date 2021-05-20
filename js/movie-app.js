@@ -28,21 +28,21 @@ $(document).ready(function () {
                         htmlStr += `<p class="card-director">${movie.director}</p>`
                         htmlStr += `<p class="card-rating">${movie.rating}</p>`
                         htmlStr += `<button id="delete-${movie.id}" class="btn btn-primary deleteMovie">Delete</button>`;
-                        htmlStr += `<button id="edit-${movie.id}" class="btn btn-primary editMovie">Edit Movie</button><br>`;
+                        htmlStr += `<button id="edit-${movie.id}" data-value="${movie.id}" class="btn btn-primary editMovie">Edit Movie</button><br>`;
                         htmlStr += `</div>`
                         htmlStr += `</div>`
 
 
-                        htmlStr += `<div id="editCurrentMovie-${movie.id}" style="display: none">`
+                        htmlStr += `<div id="editCurrentMovie-${movie.id}"  style="display: none">`
                         htmlStr += `<h3>Edit this movie</h3>`
                         htmlStr += `<form id="editForm"><div class="form-group">`;
-                        htmlStr += `<label for="edit-title">Edit Movie Title</label>`;
-                        htmlStr += `<input value="${movie.title}" type="text" class="form-control" id="edit-title" aria-describedby="emailHelp" placeholder='${movie.title}'></div>`;
-                        htmlStr += `<div><label for="edit-director">Edit Movie Director</label>`;
-                        htmlStr += `<input value="${movie.director}" type="text" class="form-control" id="edit-director" placeholder="${movie.director}">
+                        htmlStr += `<label for="edit-title-${movie.id}">Edit Movie Title</label>`;
+                        htmlStr += `<input value="${movie.title}" type="text" class="form-control" id="edit-title-${movie.id}" aria-describedby="emailHelp" placeholder='${movie.title}'></div>`;
+                        htmlStr += `<div><label for="edit-director-${movie.id}">Edit Movie Director</label>`;
+                        htmlStr += `<input value="${movie.director}" type="text" class="form-control" id="edit-director-${movie.id}" aria-describedby="emailHelp" placeholder="${movie.director}">
     </div>`;
-                        htmlStr += `<label for="edit-rate">Edit the Rating</label>`;
-                        htmlStr += `<select id="edit-rate" class="form-select" aria-label="Default select example">`;
+                        htmlStr += `<label for="edit-rate-${movie.id}">Edit the Rating</label>`;
+                        htmlStr += `<select id="edit-rate-${movie.id}" class="form-select" aria-label="Default select example">`;
                         htmlStr += `<option>Rate your title</option>`;
                         htmlStr += `<option value="1">One</option>`;
                         htmlStr += `<option value="2">Two</option>`;
@@ -50,8 +50,11 @@ $(document).ready(function () {
                         htmlStr += `<option value="4">Four</option>`;
                         htmlStr += `<option value="5">Five</option>`;
                         htmlStr += `</select>`;
-                        htmlStr += `<button id="save-${movie.id}" class="btn btn-primary">Save</button></form></div>`
+                        htmlStr += `<button id="save-${movie.id}" data-value="${movie.id}" class="btn btn-primary">Save</button></form></div>`
                         $('#container').append(htmlStr)
+
+
+
                         //delete movie button
                         $(`#delete-${movie.id}`).click(function () {
                             fetch(`https://quiet-purring-yellowhorn.glitch.me/movies/${movie.id}`, deleteOptions).then(getMovies)
@@ -61,12 +64,19 @@ $(document).ready(function () {
                             $(`#editCurrentMovie-${movie.id}`).css('display', 'inline');
                         })
 
+                        // let newTitle = $('#edit-title').val();
+                        // console.log('new title' + newTitle)
+
+                        // let editId = $(this).attr('data-value');
+                        // console.log('edit id' + editId);
+
                         $(`#save-${movie.id}`).click(function (e) {
                             e.preventDefault();
                             let patchThis = {
-                                "title": $('#edit-title').val(),
-                                "director": $('#edit-director').val(),
-                                "rating": $('#edit-rate').val()
+                                "title": $(`#edit-title-${movie.id}`).val(),
+                                // "title": newTitle,
+                                "director": $(`#edit-director-${movie.id}`).val(),
+                                "rating": $(`#edit-rate-${movie.id}`).val()
                             }
 
                             let patchOptions = {
@@ -88,11 +98,10 @@ $(document).ready(function () {
                         },
                     }
 
+                }).then (function () {
 
-
-
-                });
-        }, 1500)
+            });
+        }, 200)
 
     }
 
