@@ -12,11 +12,11 @@
 
 <header>
     <div class="jumbotron jumbotron-fluid">
-        <div class="container ">
-            <div class="d-flex justify-content-center align-content-center">
-                <h1 class="display-4 d-inline"><strong>Video Warehouse</strong></h1>
+        <div class="container">
+            <div class="d-flex justify-content-center align-content-center heading" heading>
+                <h1 class="display-4 d-inline" id="warehouse"><strong>VIDEO WAREHOUSE</strong></h1>
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center heading">
                 <p class="lead">Create a library of your favorite movies. Add, edit, and delete titles from all
                     genres.</p>
             </div>
@@ -24,21 +24,22 @@
     </div>
 </header>
 
+<!--Add movie form and button-->
 <form class="row" id="addForm">
-    <div class="form-group col-7">
+    <div class="form-group col-4">
         <label for="movie-title" class="label"></label>
         <input type="text" class="form-control" id="movie-title" aria-describedby="emailHelp"
                placeholder="Add a movie title">
     </div>
-    <!--                    <div class="form-group col-6">-->
-    <!--                        <label for="movie-director">Movie Director</label>-->
-    <!--                        <input type="text" class="form-control" id="movie-director" aria-describedby="emailHelp"-->
-    <!--                               placeholder="Add a movie director">-->
-    <!--                    </div>-->
-    <div class="form-group col-3">
+    <div class="form-group col-4">
+        <label for="movie-director">Movie Director</label>
+        <input type="text" class="form-control" id="movie-director" aria-describedby="emailHelp"
+               placeholder="Add a movie director">
+    </div>
+    <div class="form-group col-2">
         <label for="movie-rate" class="label"></label>
         <select id="movie-rate" class="form-select " aria-label="Default select example">
-            <option selected>Rate your title</option>
+            <option selected>Rating</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -50,9 +51,8 @@
     <button id="addMovie" class="btn btn-primary col-2 align-self-end" style="height: 35px">Add Movie</button>
 </form>
 
+<!--Main container that holds movie cards-->
 <main class="d-flex justify-content-around container" id="container"></main>
-
-
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"

@@ -1,10 +1,27 @@
-body {
-    /*background-image: url("../img/popcorn.jpeg");*/
-    background-color: black;
+
+@font-face {
+    font-family: 'MyWebFont';
+    src: url('../img/matrix.regular.ttf') format('truetype');
 }
+
 
 .jumbotron {
     background-image: url("../img/popcorn.jpeg");
+}
+
+.heading {
+    background: rgba(255, 255, 255, 0.6);
+    font-weight: bold;
+
+}
+
+#warehouse {
+    font-family: MyWebFont, sans-serif;
+    font-size: 60px;
+}
+
+.lead {
+    font-weight: bold;
 }
 
 .label {
@@ -40,6 +57,8 @@ body {
     /*display: flex;*/
     /*align-content: center;*/
     padding-bottom: 8px;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 

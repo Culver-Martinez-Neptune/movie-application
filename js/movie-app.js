@@ -2,15 +2,11 @@
 
 // quiet-purring-yellowhorn
 
-// Can use for the loading animation/message
-// let loader = `<div class="boxLoading"></div>`;
-// document.getElementById('movieResult').innerHTML = loader;
 $(document).ready(function () {
     const getMovies = () => {
-        $('#container').html(`<div id="loop" class="center"></div>
-<div id="bike-wrapper" class="center">
-  <div id="bike" class="centerBike"></div>
-</div>`)
+        //loading gif
+        $('#container').html(`<a href="https://www.animatedimages.org/cat-popcorn-1692.htm"><img src="https://www.animatedimages.org/data/media/1692/animated-popcorn-image-0002.gif" border="0" height="300px" alt="animated-popcorn-image-0002" /></a>`)
+        //set timeout to show loading gif
         setTimeout(() => {
             fetch('https://quiet-purring-yellowhorn.glitch.me/movies')
                 .then(response => response.json())
@@ -18,12 +14,8 @@ $(document).ready(function () {
                     $('#container').html('')
                     console.log(movies)
                     for (let movie of movies) {
-                        // let htmlStr = `<img src="${movie.poster}"> <h1>${movie.title}</h1><p>by: ${movie.director}</p><p>Rating: ${movie.rating}</p>`;
-                        // htmlStr += `<button id="delete-${movie.id}" class="btn btn-primary deleteMovie">Delete</button>`;
-                        // htmlStr += `<button id="edit-${movie.id}" class="btn btn-primary editMovie">Edit Movie</button><br>`;
 
-                        // create form to edit movie
-
+                        // create movie cards
                         let htmlStr = `<div class="card"  style="width: 18rem;">`;
                         htmlStr += `<img class="card-img-top" src="${movie.poster}" id="posters" alt="Card image cap">`
                         htmlStr += ` <div class="card-body">`
@@ -35,7 +27,7 @@ $(document).ready(function () {
                         htmlStr += `</div>`
                         htmlStr += `</div>`
 
-
+                        // create form to edit movie
                         htmlStr += `<div id="editCurrentMovie-${movie.id}"  style="display: none">`
                         htmlStr += `<h3>Edit this movie</h3>`
                         htmlStr += `<form id="editForm"><div class="form-group">`;
@@ -57,22 +49,17 @@ $(document).ready(function () {
                         $('#container').append(htmlStr)
 
 
-
                         //delete movie button
                         $(`#delete-${movie.id}`).click(function () {
                             fetch(`https://quiet-purring-yellowhorn.glitch.me/movies/${movie.id}`, deleteOptions).then(getMovies)
                         })
+
                         //Edit movie button
                         $(`#edit-${movie.id}`).click(function () {
                             $(`#editCurrentMovie-${movie.id}`).css('display', 'inline');
                         })
 
-                        // let newTitle = $('#edit-title').val();
-                        // console.log('new title' + newTitle)
-
-                        // let editId = $(this).attr('data-value');
-                        // console.log('edit id' + editId);
-
+                        //Save edits button
                         $(`#save-${movie.id}`).click(function (e) {
                             e.preventDefault();
                             let patchThis = {
@@ -101,41 +88,39 @@ $(document).ready(function () {
                         },
                     }
 
-                }).then (function () {
+                }).then(function () {
 
             });
         }, 2500)
 
     }
 
-
+    // Add movie button
     $('#addMovie').on("click", (e) => {
         e.preventDefault();
         let movieT = $('#movie-title').val()
         fetch(`http://www.omdbapi.com/?apikey=${MOVIE_API_TOKEN}&t=${movieT}`)
             .then(resp => resp.json())
-            .then(data =>{
+            .then(data => {
                 let poster = data.Poster;
                 console.log(poster)
 
-        let newMovie = {
-            poster: poster,
-            title: $('#movie-title').val(),
-            director: $('#movie-director').val(),
-            rating: $("#movie-rate").val()
-        };
-        console.log("newMovie");
-        let postOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newMovie),
-        }
+                let newMovie = {
+                    poster: poster,
+                    title: $('#movie-title').val(),
+                    director: $('#movie-director').val(),
+                    rating: $("#movie-rate").val()
+                };
+                console.log("newMovie");
+                let postOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newMovie),
+                }
 
-        fetch("https://quiet-purring-yellowhorn.glitch.me/movies", postOptions).then(getMovies);
-            // .then(resp => resp.json())
-            // .then(movies => console.log(movies));
+                fetch("https://quiet-purring-yellowhorn.glitch.me/movies", postOptions).then(getMovies);
 
             });
 
@@ -143,11 +128,6 @@ $(document).ready(function () {
 
     getMovies()
     //
-
-
-
-
-
 
 
 });
