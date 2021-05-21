@@ -22,13 +22,13 @@ $(document).ready(function () {
                         // create form to edit movie
 
                         let htmlStr = `<div class="card"  style="width: 18rem;">`;
-                        htmlStr += `<img class="card-img-top" src="${movie.poster}" alt="Card image cap">`
+                        htmlStr += `<img class="card-img-top" src="${movie.poster}" id="posters" alt="Card image cap">`
                         htmlStr += ` <div class="card-body">`
                         htmlStr += ` <h5 class="card-title">${movie.title}</h5>`
-                        htmlStr += `<p class="card-director">${movie.director}</p>`
-                        htmlStr += `<p class="card-rating">${movie.rating}</p>`
-                        htmlStr += `<button id="delete-${movie.id}" class="btn btn-primary deleteMovie">Delete</button>`;
-                        htmlStr += `<button id="edit-${movie.id}" data-value="${movie.id}" class="btn btn-primary editMovie">Edit Movie</button><br>`;
+                        htmlStr += `<p class="card-director">Directed by: ${movie.director}</p>`
+                        htmlStr += `<p class="card-rating">${movie.rating} out of 5 stars</p>`
+                        htmlStr += `<div class="d-flex justify-content-between align-items-center"><button id="edit-${movie.id}" data-value="${movie.id}" class="btn btn-primary editMovie">Edit Movie</button>`;
+                        htmlStr += `<span id="delete-${movie.id}"><i class="fas fa-trash-alt" id="trash"></i></span></div>`;
                         htmlStr += `</div>`
                         htmlStr += `</div>`
 
@@ -130,9 +130,9 @@ $(document).ready(function () {
             body: JSON.stringify(newMovie),
         }
 
-        fetch("https://quiet-purring-yellowhorn.glitch.me/movies", postOptions)
-            .then(resp => resp.json())
-            .then(movies => console.log(movies));
+        fetch("https://quiet-purring-yellowhorn.glitch.me/movies", postOptions).then(getMovies);
+            // .then(resp => resp.json())
+            // .then(movies => console.log(movies));
 
             });
 

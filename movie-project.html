@@ -3,51 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Application</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="css/movie-project.css">
-
+    <script src="https://kit.fontawesome.com/f326ac487a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<main class="d-flex" id="container"></main>
 
+<header>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container ">
+            <div class="d-flex justify-content-center align-content-center">
+                <h1 class="display-4 d-inline"><strong>Video Warehouse</strong></h1>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p class="lead">Create a library of your favorite movies. Add, edit, and delete titles from all
+                    genres.</p>
+            </div>
+        </div>
+    </div>
+</header>
 
-<form>
-    <div class="form-group">
-        <label for="movie-title">Movie Title</label>
-        <input type="text" class="form-control" id="movie-title" aria-describedby="emailHelp" placeholder="Add a movie title">
+<form class="row" id="addForm">
+    <div class="form-group col-7">
+        <label for="movie-title" class="label"></label>
+        <input type="text" class="form-control" id="movie-title" aria-describedby="emailHelp"
+               placeholder="Add a movie title">
     </div>
-    <div>
-        <label for="movie-director">Movie Director</label>
-        <input type="text" class="form-control" id="movie-director" aria-describedby="emailHelp" placeholder="Add a movie director">
+    <!--                    <div class="form-group col-6">-->
+    <!--                        <label for="movie-director">Movie Director</label>-->
+    <!--                        <input type="text" class="form-control" id="movie-director" aria-describedby="emailHelp"-->
+    <!--                               placeholder="Add a movie director">-->
+    <!--                    </div>-->
+    <div class="form-group col-3">
+        <label for="movie-rate" class="label"></label>
+        <select id="movie-rate" class="form-select " aria-label="Default select example">
+            <option selected>Rate your title</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+        </select>
     </div>
-    <label for="movie-rate">Rate your title</label>
-    <select id="movie-rate" class="form-select" aria-label="Default select example">
-        <option selected>Rate your title</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        <option value="4">Four</option>
-        <option value="5">Five</option>
-    </select>
-    <button id="addMovie" class="btn btn-primary">Submit</button>
+
+    <button id="addMovie" class="btn btn-primary col-2 align-self-end" style="height: 35px">Add Movie</button>
 </form>
 
+<main class="d-flex justify-content-around container" id="container"></main>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="js/keys.js"></script>
 <script src="js/movie-app.js"></script>
 </body>

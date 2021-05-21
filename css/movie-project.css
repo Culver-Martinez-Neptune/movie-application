@@ -1,15 +1,42 @@
+body {
+    /*background-image: url("../img/popcorn.jpeg");*/
+    background-color: black;
+}
+
+.jumbotron {
+    background-image: url("../img/popcorn.jpeg");
+}
+
+.label {
+    height: 0;
+}
 
 #container{
     flex-wrap: wrap;
     align-content: space-evenly;
 }
-img{
+#posters {
     height: 350px;
+}
+
+#film {
+    height: 100px;
+    width: 350px;
 }
 
 .card{
     display: flex;
     margin: 10px;
+}
 
+#trash:hover {
+    cursor: pointer;
+}
+
+#addForm {
+    /*background-color: white;*/
+    /*display: flex;*/
+    /*align-content: center;*/
+    padding-bottom: 8px;
 }
 
