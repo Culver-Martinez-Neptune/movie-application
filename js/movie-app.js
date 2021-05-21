@@ -7,7 +7,10 @@
 // document.getElementById('movieResult').innerHTML = loader;
 $(document).ready(function () {
     const getMovies = () => {
-        $('#container').html('loading')
+        $('#container').html(`<div id="loop" class="center"></div>
+<div id="bike-wrapper" class="center">
+  <div id="bike" class="centerBike"></div>
+</div>`)
         setTimeout(() => {
             fetch('https://quiet-purring-yellowhorn.glitch.me/movies')
                 .then(response => response.json())
@@ -101,7 +104,7 @@ $(document).ready(function () {
                 }).then (function () {
 
             });
-        }, 200)
+        }, 2500)
 
     }
 
